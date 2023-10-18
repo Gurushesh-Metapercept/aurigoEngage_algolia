@@ -378,65 +378,65 @@ function setActiveClassOnClick(e) {
   });
 
   
-  function sendEmail(ele, event) {
-    event.preventDefault();
+//   function sendEmail(ele, event) {
+//     event.preventDefault();
 
-    let emailsList = ["gurushesh.p@metapercept.com"]
+//     let emailsList = ["gurushesh.p@metapercept.com"]
 
-    const isCc = ()=>{
-      let checkBoxCC = document.getElementById("checkBoxCC");
-      if (checkBoxCC.checked) {
-        emailsList.push("g.r.pawar000@gmail.com")
-      }else{
-        emailsList = ["gurushesh.p@metapercept.com"]
-      }
-    }
+//     const isCc = ()=>{
+//       let checkBoxCC = document.getElementById("checkBoxCC");
+//       if (checkBoxCC.checked) {
+//         emailsList.push("example@gmail.com", "abc@abc.com", "xyc@gmail.com")
+//       }else{
+//         emailsList = ["gurushesh.p@metapercept.com"]
+//       }
+//     }
 
-    isCc();
+//     isCc();
 
 
-    Email.send({
-      Host : "smtp.elasticemail.com",
-      Username : "gurushesh.p@metapercept.com",
-      Password : "A45F7607648D21089CDB439D89039DF77AB7",
-      To : emailsList,
-      From : `gurushesh.p@metapercept.com`,
-      Subject : "User Feedback",
-      Body : `User has submitted feedback for the following post <a href="${ele.POST_URL.value}"><b>Link</b></a> <br/>
-      <b>Email:</b> ${ele.email.value} <br/>
-      <b>User Reaction</b>: ${ele.REVIEW.value} <br/>
-      <b>Comment</b>: ${ele.DESCRIPTION.value}
-      `
-  }).then(
-    message => console.log(message)
-  );
+//     Email.send({
+//       Host : "smtp.elasticemail.com",
+//       Username : "gurushesh.p@metapercept.com",
+//       Password : "A45F7607648D21089CDB439D89039DF77AB7",
+//       To : emailsList,
+//       From : `gurushesh.p@metapercept.com`,
+//       Subject : "User Feedback",
+//       Body : `User has submitted feedback for the following post <a href="${ele.POST_URL.value}"><b>Link</b></a> <br/>
+//       <b>Email:</b> ${ele.email.value} <br/>
+//       <b>User Reaction</b>: ${ele.REVIEW.value} <br/>
+//       <b>Comment</b>: ${ele.DESCRIPTION.value}
+//       `
+//   }).then(
+//     message => console.log(message)
+//   );
 
-  return console.warn("Feedback submitted..")
-}
+//   return console.warn("Feedback submitted..")
+// }
 
 
   
-// function sendEmail(ele, event) {
-//   event.preventDefault();
+function sendEmail(ele, event) {
+  event.preventDefault();
 
-//   Email.send({
-//     Host : "smtp.elasticemail.com",
-//     Username : "gurushesh.p@metapercept.com",
-//     Password : "A45F7607648D21089CDB439D89039DF77AB7",
-//     To : "gurushesh.p@metapercept.com",
-//     From : `gurushesh.p@metapercept.com`,
-//     Subject : "User Feedback",
-//     Body : `User has submitted feedback for the following post <a href="${ele.POST_URL.value}"><b>Link</b></a> <br/>
-//     <b>Email:</b> ${ele.email.value} <br/>
-//     <b>User Reaction</b>: ${ele.REVIEW.value} <br/>
-//     <b>Comment</b>: ${ele.DESCRIPTION.value}
-//     `
-// }).then(
-//   message => alert(message)
-// );
+  Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "gurushesh.p@metapercept.com",
+    Password : "A45F7607648D21089CDB439D89039DF77AB7",
+    To : "gurushesh.p@metapercept.com",
+    From : `gurushesh.p@metapercept.com`,
+    Subject : "User Feedback",
+    Body : `User has submitted feedback for the following post <a href="${ele.POST_URL.value}"><b>Link</b></a> <br/>
+    <b>Email:</b> ${ele.email.value} <br/>
+    <b>User Reaction</b>: ${ele.REVIEW.value} <br/>
+    <b>Comment</b>: ${ele.DESCRIPTION.value}
+    `
+}).then(
+  message => console.log(message)
+);
 
-// return console.warn("Feedback submitted..")
-// }
+return console.warn("Feedback submitted..")
+}
 
 
 
