@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", function() {
   var sidebar = document.querySelector(".bs-sidebar");
   sidebar.style.height = "calc(100vh - 57px) !important";
-  console.log("heloo")
 });
 
 
@@ -760,3 +759,100 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+
+
+
+// ========================================================================= Download Function 
+
+window.onload = function() {
+  document.getElementById('download-btn').addEventListener('click', function() {
+    window.scrollTo(0, 0);
+
+    const dwnlAndLoader = document.getElementById("dwnlAndLoader")
+    dwnlAndLoader.querySelector("#download-btn").classList.add("d-none")
+    dwnlAndLoader.querySelector(".spinner-border").classList.remove("d-none")
+
+
+    setTimeout(async function() {
+      const headerElement = document.querySelector('#mainHeader').cloneNode(true);
+      const articleElement = document.querySelector('article').cloneNode(true);
+      const pageTitle = document.title;
+
+      const logo = document.querySelector('.dynamicLogo').cloneNode(true);
+
+      const newHeader = document.createElement("div");
+      newHeader.classList.add("navbar")
+      logo.querySelector("img").classList.add("dynamicLogoPrint")
+
+      newHeader.appendChild(logo)
+      
+
+      const elementsToIgnore = articleElement.querySelectorAll('.ignore-this');
+      elementsToIgnore.forEach(function(element) {
+        element.remove();
+      });
+
+      const headerElementsToIgnore = headerElement.querySelectorAll('.ignore-this');
+      headerElementsToIgnore.forEach(function(element) {
+        element.remove();
+      });
+
+      const combinedElement = document.createElement('div');
+      combinedElement.appendChild(newHeader);
+      combinedElement.appendChild(articleElement);
+
+      const imageTypes = ['png', 'jpeg', 'webp']; 
+      const options = {
+        margin: 10, 
+        filename: pageTitle,
+        image: { type: imageTypes, quality: 0.98 }, 
+        html2canvas: { scale: 2 }, 
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      };
+
+      try {
+        await html2pdf().from(combinedElement).set(options).save(pageTitle);
+        console.log('PDF generated and saved successfully.');
+
+        dwnlAndLoader.querySelector("#download-btn").classList.remove("d-none")
+        dwnlAndLoader.querySelector(".spinner-border").classList.add("d-none")
+
+        alert('PDF downloaded successfully.');
+
+
+      } catch (error) {
+
+        dwnlAndLoader.querySelector("#download-btn").classList.remove("d-none")
+        dwnlAndLoader.querySelector(".spinner-border").classList.add("d-none")
+  
+        console.error('An error occurred while generating or saving the PDF:', error);
+        alert("Download failed...")
+
+      }
+    }, 1000);
+  });
+};
+
+
+
+  // ========================================================================= Print Function 
+function printPage() {
+
+  window.scrollTo(0, 0);
+
+  setTimeout(() => {
+
+  let elementsToHide = document.querySelectorAll('.no-print');
+  elementsToHide.forEach(function(element) {
+    element.style.display = 'none';
+  });
+
+  window.print();
+
+  elementsToHide.forEach(function(element) {
+    element.style.display = '';
+  });
+  }, 500)
+}
